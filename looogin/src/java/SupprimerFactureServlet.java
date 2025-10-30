@@ -1,0 +1,68 @@
+package src.java;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(urlPatterns="/SupprimerFactureServlet")
+public class SupprimerFactureServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Récupération du paramètre contenant  à supprimer
+     int Numéro = Integer.parseInt(request.getParameter("numF"));
+
+        
+
+        try {
+           // Connexion à la base de données
+               Class.forName("com.mysql.jdbc.Driver");
+               Connection c = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa","root","");
+
+            // Préparation de la requête SQL pour supprimer le client
+            String sql = "DELETE FROM facture WHERE numF = ?";
+            PreparedStatement statement = c.prepareStatement(sql);
+            statement.setInt(1, Numéro);
+
+            // Exécution de la requête SQL
+            int rowsDeleted = statement.executeUpdate();
+          
+            if (rowsDeleted > 0) {
+                // Suppression réussie
+                String messageS = "Facture supprimé avec succès.";
+                 request.getSession().setAttribute("messageS", messageS);
+                 response.sendRedirect("home.jsp");
+                
+            } else {
+                // Aucun client supprimé (ID invalide ou client inexistant)
+                String message = "Facture n'est été pas supprimé avec succès.";
+                response.sendRedirect("home.jsp?message=" + message);
+                response.setContentType("text/html");
+                PrintWriter p = response.getWriter();
+                p.println("<html><body><h1>" + message + "</h1></body></html>") ;
+            }
+
+            // Fermeture des ressources
+            statement.close();
+            c.close();
+        } catch (SQLException e) {
+            // Gestion des exceptions SQL
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SupprimerClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+    }
+}

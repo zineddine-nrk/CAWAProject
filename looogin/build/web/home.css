@@ -1,0 +1,79 @@
+
+    body{
+        background-color: white;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        position: relative;
+        left: 230px;
+        top: 90px;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    .home{
+        position: absolute;
+  top: 43px;
+  
+  left:30px ;
+    }
+    .deconnexion-link {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 48px 70px; 
+   background-color: buttonface;
+}
+.btn {
+  margin-right: 20px; /* Espacement entre les boutons */
+}
+
+.btn-primary {
+  color: white; /* Couleur du texte */
+  background-color: #007bff; /* Couleur de fond */
+  border-color: #007bff; /* Couleur de la bordure */
+}
+
+.btn-primary:hover {
+  background-color: white; /* Couleur de fond au survol */
+  border-color: #0062cc; /* Couleur de la bordure au survol */
+}
+   
+    .container.top-section {
+  display: flex;
+  justify-content: space-between;
+  background-color: buttonface;
+  padding: 41px;
+  padding-left: 229px;
+  margin-left: 0;
+ 
+  margin-top: 0;
+}
+
+.container.top-section a {
+  flex-grow: 1;
+  text-align: center;
+}
+      
+    .fixed-side-section {
+      position: fixed;
+      top: 120px;
+      left: 0;
+      bottom: 0;
+      width: 200px;
+      background-color: #4caf50;
+      padding: 20px;
+    }
+

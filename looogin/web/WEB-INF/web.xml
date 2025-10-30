@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	 version="3.1">
+<servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>loginServlet</servlet-class>
+</servlet>
+
+<servlet>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <servlet-class>WelcomeServlet</servlet-class>
+</servlet>
+
+<servlet>
+    <servlet-name>LogoutServlet </servlet-name>
+    <servlet-class>LogoutServlet </servlet-class>
+</servlet>
+
+<servlet>
+    <servlet-name>add</servlet-name>
+    <servlet-class>add</servlet-class>
+</servlet>
+
+<servlet>
+    <servlet-name>AjouterFactureServlet</servlet-name>
+    <servlet-class>AjouterFactureServlet</servlet-class>
+</servlet>
+
+<servlet>
+    <servlet-name>AjouterArticleServlet</servlet-name>
+    <servlet-class>AjouterArticleServlet</servlet-class>
+</servlet>
+
+
+
+
+
+<servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+    <servlet-name>LogoutServlet </servlet-name>
+    <url-pattern>/LogoutServlet </url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+    <servlet-name>add</servlet-name>
+    <url-pattern>/AjouterClient</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+    <servlet-name>AjouterArticleServlet</servlet-name>
+    <url-pattern>/AjouterArticleServlet</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+    <servlet-name>AjouterFactureServlet</servlet-name>
+    <url-pattern>/AjouterFactureServlet</url-pattern>
+</servlet-mapping>
+
+
+
+
+</web-app>
