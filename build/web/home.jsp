@@ -5,14 +5,14 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="home.css">
   <style>
-    /* Styles CSS supplémentaires */
+    /* Styles CSS supplï¿½mentaires */
 
-    /* Définition des styles pour le corps de la page */
+    /* Dï¿½finition des styles pour le corps de la page */
     body{
         background-color: white;
     }
     
-    /* Définition des styles pour le tableau */
+    /* Dï¿½finition des styles pour le tableau */
     table {
         border-collapse: collapse;
         width: 100%;
@@ -35,14 +35,14 @@
         background-color: #f5f5f5;
     }
     
-    /* Définition des styles pour le lien "Home" */
+    /* Dï¿½finition des styles pour le lien "Home" */
     .home{
         position: absolute;
         top: 43px;
         left: 30px ;
     }
     
-    /* Définition des styles pour le lien "Déconnexion" */
+    /* Dï¿½finition des styles pour le lien "Dï¿½connexion" */
     .deconnexion-link {
         position: absolute;
         top: 0px;
@@ -51,7 +51,7 @@
         background-color: buttonface;
     }
     
-    /* Définition des styles pour les boutons */
+    /* Dï¿½finition des styles pour les boutons */
     .btn {
         margin-right: 20px; /* Espacement entre les boutons */
     }
@@ -67,7 +67,7 @@
         border-color: #0062cc; /* Couleur de la bordure au survol */
     }
 
-    /* Définition des styles pour la section supérieure de la page */
+    /* Dï¿½finition des styles pour la section supï¿½rieure de la page */
     .container.top-section {
         display: flex;
         justify-content: space-between;
@@ -83,7 +83,7 @@
         text-align: center;
     }
       
-    /* Définition des styles pour la section fixe sur le côté gauche */
+    /* Dï¿½finition des styles pour la section fixe sur le cï¿½tï¿½ gauche */
     .fixed-side-section {
         position: fixed;
         top: 120px;
@@ -98,14 +98,14 @@
 </head>
 <body>
   <% 
-    // Récupération de la session et du nom d'utilisateur
+    // Rï¿½cupï¿½ration de la session et du nom d'utilisateur
     HttpSession ss = request.getSession(false);
     String user = (String)ss.getAttribute("user") ;
     if (user != null) { 
   %>
   <div class="container top-section">
-    <!-- Lien de déconnexion -->
-    <a href="DeconnexionServlet" class="deconnexion-link">Déconnexion</a>
+    <!-- Lien de dï¿½connexion -->
+    <a href="DeconnexionServlet" class="deconnexion-link">Dï¿½connexion</a>
     
     <!-- Boutons de navigation -->
     <a href="#" class="btn btn-primary" onclick="loadClients()">Clients</a>
@@ -142,9 +142,9 @@
       out.print("error");
   } %>
   
-  <%-- Affichage des messages de succès ou d'erreur --%>
+  <%-- Affichage des messages de succï¿½s ou d'erreur --%>
   <% 
-    // Récupération des messages de succès ou d'erreur
+    // Rï¿½cupï¿½ration des messages de succï¿½s ou d'erreur
     String message = (String) request.getSession().getAttribute("message");
     request.getSession().removeAttribute("message");
   %>
