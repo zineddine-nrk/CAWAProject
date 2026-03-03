@@ -27,7 +27,3 @@ asadmin deploy --name cawa --contextroot cawa --force cawa.war
 Notes
 - JDBC in sources uses `jdbc:mysql://localhost/projetcawa?useSSL=false` and the root user (no password) — update credentials or configure a GlassFish JNDI `DataSource` for production.
 - Project uses `jakarta.servlet` (GlassFish 7) and was compiled with `--release 17` for compatibility.
-- For best practice: create a DB user with password, move DB connection to a server `DataSource`, and remove DB logic from JSPs.
-
-Contact
-- If you want, I can convert the JDBC code to use a GlassFish JNDI `DataSource` and update deployment instructions.
