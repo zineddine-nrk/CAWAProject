@@ -22,7 +22,7 @@ jar -cvf cawa.war -C build/web .
 asadmin deploy --name cawa --contextroot cawa --force cawa.war
 ```
 
-4. Open the app: http://localhost:8080/cawa/
+4. Open the app: http://localhost:8080/cawa/login.jsp
 
 Notes
 - JDBC in sources uses `jdbc:mysql://localhost/projetcawa?useSSL=false` and the root user (no password) — update credentials or configure a GlassFish JNDI `DataSource` for production.
