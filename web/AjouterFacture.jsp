@@ -39,7 +39,7 @@
           try {
                 // Connexion à la base de données
                  Class.forName("com.mysql.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa", "root", "");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa?useSSL=false", "root", "");
                 Statement stmt = conn.createStatement();
 
                 // Requête SQL pour récupérer tous les clients

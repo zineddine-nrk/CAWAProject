@@ -1,27 +1,31 @@
 
+package src.java;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = {"/AffichageArticle"})
 public class AffichageArticle extends HttpServlet {
 
    
-       public void doGet(HttpServletRequest r, HttpServletResponse s)
-    throws IOException
+    @Override
+    public void doGet(HttpServletRequest r, HttpServletResponse s)
+            throws jakarta.servlet.ServletException, IOException
     {
         try
         {           
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa","root","");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa?useSSL=false","root",
+"");
             PreparedStatement pst = c.prepareStatement("select * from article;");
 
             PrintWriter p = s.getWriter();
@@ -48,12 +52,8 @@ public class AffichageArticle extends HttpServlet {
                 p.print("</tr>");
             }
             p.print("</table></body></html>");
+        } catch (Exception e) {
+            throw new ServletException(e);
         }
-        catch(Exception e)
-        {
-            System.out.print(e);
-        }
-        
     }
-
 }

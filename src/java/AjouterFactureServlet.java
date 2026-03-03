@@ -10,12 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns="/AjouterFactureServlet")
 public class AjouterFactureServlet extends HttpServlet {
@@ -31,7 +31,7 @@ public class AjouterFactureServlet extends HttpServlet {
 
             Class.forName("com.mysql.jdbc.Driver");
 
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa", "root", "")) {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa?useSSL=false", "root", "")) {
                 // Vérifier la validité de l'ID client
                 PreparedStatement clientStmt = conn.prepareStatement("SELECT idClient FROM client WHERE idClient = ?");
                 clientStmt.setInt(1, idClient);

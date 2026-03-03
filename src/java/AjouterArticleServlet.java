@@ -2,11 +2,11 @@ package src.java;
 
 import java.io.*;
 import java.sql.*;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/AjouterArticleServlet")
 public class AjouterArticleServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class AjouterArticleServlet extends HttpServlet {
 
             Class.forName("com.mysql.jdbc.Driver");
             
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa", "root", "")) {
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa?useSSL=false", "root", "")) {
                 // Préparation de la requête SQL pour ajouter un nouvel article
                 String sql = "INSERT INTO article (refArticle, nomArticle, quantite, prixVente) VALUES (?, ?, ?, ?)";
                 PreparedStatement statement = conn.prepareStatement(sql);

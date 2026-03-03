@@ -2,11 +2,11 @@ package src.java;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.sql.*;
-import javax.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.WebServlet;
 
 
 
@@ -19,7 +19,7 @@ public class AffichageClient extends HttpServlet
         try
         {           
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa","root","");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa?useSSL=false","root","");
             PreparedStatement pst = c.prepareStatement("select * from client;");
 
             PrintWriter p = s.getWriter();

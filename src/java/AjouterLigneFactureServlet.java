@@ -6,11 +6,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/AjouterLigneFactureServlet")
 public class AjouterLigneFactureServlet extends HttpServlet {
@@ -27,29 +27,49 @@ public class AjouterLigneFactureServlet extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
 
             // Connexion à la base de données
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetcawa?useSSL=false", "root", "")) {
+                // Vérifier que l'article existe
+                try (PreparedStatement checkArticle = conn.prepareStatement("SELECT refArticle FROM article WHERE refArticle = ?")) {
+                    checkArticle.setInt(1, refArticle);
+                    try (java.sql.ResultSet rs = checkArticle.executeQuery()) {
+                        if (!rs.next()) {
+                            request.getSession().setAttribute("messageL", "Article introuvable: " + refArticle);
+                            response.sendRedirect("LigneFacture.jsp");
+                            return;
+                        }
+                    }
+                }
 
-            // Préparation de la requête SQL pour ajouter une nouvelle ligne de facture
-            String sql = "INSERT INTO ligne_facture (refArticle, numF, quantiteVendue) VALUES (?, ?, ?)";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, refArticle);
-            statement.setInt(2, numF);
-            statement.setInt(3, quantiteVendue);
+                // Vérifier que la facture existe
+                try (PreparedStatement checkFact = conn.prepareStatement("SELECT numF FROM facture WHERE numF = ?")) {
+                    checkFact.setInt(1, numF);
+                    try (java.sql.ResultSet rs2 = checkFact.executeQuery()) {
+                        if (!rs2.next()) {
+                            request.getSession().setAttribute("messageL", "Facture introuvable: " + numF);
+                            response.sendRedirect("LigneFacture.jsp");
+                            return;
+                        }
+                    }
+                }
 
-            // Exécution de la requête SQL
-            statement.executeUpdate();
+                // Préparation de la requête SQL pour ajouter une nouvelle ligne de facture
+                String sql = "INSERT INTO ligne_facture (refArticle, numF, quantiteVendue) VALUES (?, ?, ?)";
+                try (PreparedStatement statement = conn.prepareStatement(sql)) {
+                    statement.setInt(1, refArticle);
+                    statement.setInt(2, numF);
+                    statement.setInt(3, quantiteVendue);
+                    statement.executeUpdate();
+                }
+            }
 
-            // Fermeture des ressources
-            statement.close();
-            conn.close();
-            
-            // Redirection vers une page de succès ou autre
+            // Redirection vers une page de succès
             request.getSession().setAttribute("messageL", "Ligne facture ajouté avec succès");
-             response.sendRedirect("home.jsp");
-           
+            response.sendRedirect("home.jsp");
+
         } catch (ClassNotFoundException | SQLException e) {
             // Gestion des exceptions
             e.printStackTrace();
+            request.getSession().setAttribute("messageL", "Erreur: " + e.getMessage());
             response.sendRedirect("error.jsp?message=Erreur lors de la connexion à la base de données");
         }
     }
